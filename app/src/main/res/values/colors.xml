@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#42A5F5</color>
+    <color name="colorPrimaryDark">#1D6AA8</color>
+    <color name="colorPrimaryLight">#5EB7FF</color>
+    <color name="splashStatusBarColor">#42A5F5</color>
+    <color name="colorAccent">#A86B0C</color>
+    <color name="colorAccentLight">#F5AF42</color>
+</resources>
