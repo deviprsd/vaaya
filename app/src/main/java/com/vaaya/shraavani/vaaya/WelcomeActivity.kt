@@ -1,6 +1,5 @@
 package com.vaaya.shraavani.vaaya
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -13,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.vaaya.shraavani.vaaya.master.VaayaActivity
 import com.vaaya.shraavani.vaaya.model.Settings
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.android.synthetic.main.fragment_welcome.view.*
 
@@ -33,13 +31,12 @@ class WelcomeActivity : VaayaActivity() {
 
         container.addOnPageChangeListener(WelcomePageListener())
         tour_done.setOnClickListener { _ ->
-            val realm = Realm.getDefaultInstance()
             val runFirstTime = realm.where(Settings::class.java)
                     .equalTo("key", "run_first_time").findFirst()!!
             realm.executeTransaction {
                 runFirstTime.settings = "false"
             }
-            startActivity(Intent(this@WelcomeActivity, HomeActivity::class.java))
+            runController()
         }
     }
 

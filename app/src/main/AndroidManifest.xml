@@ -13,27 +13,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/VaayaTheme">
+
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/VaayaTheme.Splash"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:theme="@style/VaayaTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".LoginActivity"
+            android:theme="@style/VaayaTheme.Mono"
+            android:noHistory="true" />
+
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome"
-            android:theme="@style/VaayaTheme.Welcome"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:theme="@style/VaayaTheme.Mono" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/VaayaTheme" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="25a8c3aa6fabb7abe1ead3ed65d7b7a0bf804235" />
 
-        <activity android:name=".HomeActivity" />
     </application>
 
 </manifest>

@@ -10,16 +10,20 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="VaayaTheme.Welcome" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/splashStatusBarColor</item>
-        <item name="colorPrimaryDark">@color/splashStatusBarColor</item>
+    <style name="VaayaTheme.Mono" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/statusBarColor</item>
+        <item name="colorPrimaryDark">@color/statusBarColor</item>
         <item name="colorAccent">@color/colorAccentLight</item>
     </style>
 
-    <style name="VaayaTheme.Splash" parent="VaayaTheme.Welcome">
+    <style name="VaayaTheme.Splash" parent="VaayaTheme.Mono">
         <item name="android:windowBackground">@drawable/vaaya_splash</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="VaayaTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="VaayaTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

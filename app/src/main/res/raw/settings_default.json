@@ -4,11 +4,29 @@
     "settings": "true"
   },
   {
+    "key": "company",
+    "settings": "Vaaya, Inc."
+  },
+  {
+    "key": "founders",
+    "settings": "Shraavani Sharma, Gauri Sinha, Devi Prasad"
+  },
+  {
     "key": "author",
     "settings": "Devi Prasad <https://www.twitter.com/deviprsd>"
   },
   {
     "key": "dedications",
     "settings": "Shraavani Sharma, Gauri Sinha"
+  },
+  {
+    "key":"api_key"
+  },
+  {
+    "key":"api_key_expiry"
+  },
+  {
+    "key":"dummy_login",
+    "settings": "{\"user\":\"admin\",\"password\":\"admin\"}"
   }
 ]
