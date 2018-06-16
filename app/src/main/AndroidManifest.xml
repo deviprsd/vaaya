@@ -15,7 +15,8 @@
         android:theme="@style/VaayaTheme">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/VaayaTheme.Splash">
+            android:theme="@style/VaayaTheme.Splash"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,8 @@
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome"
-            android:theme="@style/VaayaTheme.NoActionBar" />
+            android:theme="@style/VaayaTheme.Welcome"
+            android:noHistory="true" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

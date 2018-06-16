@@ -1,15 +1,19 @@
 package com.vaaya.shraavani.vaaya
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.text.Html
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.vaaya.shraavani.vaaya.master.VaayaActivity
+import com.vaaya.shraavani.vaaya.model.Settings
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.android.synthetic.main.fragment_welcome.view.*
 
@@ -26,12 +30,21 @@ class WelcomeActivity : VaayaActivity() {
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         container.adapter = mSectionsPagerAdapter
         indicator.setupWithViewPager(container, true)
-        tour_done.visibility = View.GONE
 
         container.addOnPageChangeListener(WelcomePageListener())
         tour_done.setOnClickListener { _ ->
-            finish()
+            val realm = Realm.getDefaultInstance()
+            val runFirstTime = realm.where(Settings::class.java)
+                    .equalTo("key", "run_first_time").findFirst()!!
+            realm.executeTransaction {
+                runFirstTime.settings = "false"
+            }
+            startActivity(Intent(this@WelcomeActivity, HomeActivity::class.java))
         }
+    }
+
+    override fun onBackPressed() {
+        return
     }
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
@@ -54,6 +67,7 @@ class WelcomeActivity : VaayaActivity() {
 
     inner class WelcomePageListener(): ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
+            TransitionManager.beginDelayedTransition(welcome_main_content)
             when(position) {
                 in 0..2 -> {
                     if(indicator.visibility != View.VISIBLE) {

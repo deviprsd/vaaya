@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="VaayaTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="VaayaTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,23 +10,16 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="VaayaTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="VaayaTheme.Welcome" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/splashStatusBarColor</item>
         <item name="colorPrimaryDark">@color/splashStatusBarColor</item>
         <item name="colorAccent">@color/colorAccentLight</item>
+    </style>
+
+    <style name="VaayaTheme.Splash" parent="VaayaTheme.Welcome">
         <item name="android:windowBackground">@drawable/vaaya_splash</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="VaayaTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/splashStatusBarColor</item>
-        <item name="colorPrimaryDark">@color/splashStatusBarColor</item>
-        <item name="colorAccent">@color/colorAccentLight</item>
-    </style>
-
-    <style name="VaayaTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="VaayaTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

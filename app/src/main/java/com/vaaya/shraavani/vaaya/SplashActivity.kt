@@ -2,7 +2,6 @@ package com.vaaya.shraavani.vaaya
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.vaaya.shraavani.vaaya.master.VaayaActivity
 import com.vaaya.shraavani.vaaya.model.Settings
 import io.realm.Realm
@@ -43,12 +42,8 @@ class SplashActivity : VaayaActivity() {
 
         val runFirstTime = settings.equalTo("key", "run_first_time").findFirst()
         if(runFirstTime!!.settings.equals("true", true)) {
-            Log.i("Welcome", true.toString())
             Timer().schedule(2000) {
                 startActivity(Intent(this@SplashActivity, WelcomeActivity::class.java))
-            }
-            realm.executeTransaction {
-                runFirstTime.settings = "false"
             }
         } else {
             realm.executeTransaction {

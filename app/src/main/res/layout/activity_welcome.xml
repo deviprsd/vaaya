@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
+    android:id="@+id/welcome_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -24,7 +24,8 @@
         app:rippleColor="@android:color/white"
         android:clickable="true"
         android:layout_margin="16dp"
-        android:focusable="true" />
+        android:focusable="true"
+        android:visibility="gone" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/indicator"
