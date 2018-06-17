@@ -8,9 +8,11 @@
         <item name="colorAccent">@color/colorAccentLight</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="VaayaTheme.Mono" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/statusBarColor</item>
         <item name="colorPrimary">@color/statusBarColor</item>
         <item name="colorPrimaryDark">@color/statusBarColor</item>
         <item name="colorAccent">@color/colorAccentLight</item>

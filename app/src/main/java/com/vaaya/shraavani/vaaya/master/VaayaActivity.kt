@@ -53,7 +53,6 @@ open class VaayaActivity: AppCompatActivity() {
                 .equalTo("key", "run_first_time").findFirst()
         val apiKey = realm.where(Settings::class.java)
                 .beginsWith("key", "api_key").findAll().sort("key")
-
         if(runFirstTime!!.settings.equals("true", true)) {
             Timer().schedule(2000) {
                 startActivity(Intent(this@VaayaActivity, WelcomeActivity::class.java))
@@ -64,8 +63,19 @@ open class VaayaActivity: AppCompatActivity() {
             /*realm.executeTransaction {
                 runFirstTime.settings = "true"
             }*/
+            finishAffinity()
             startActivity(Intent(this@VaayaActivity, HomeActivity::class.java))
         }
+    }
+
+    protected fun logout() {
+        val api = realm.where(Settings::class.java).beginsWith("key", "api_key").findAll()
+        realm.executeTransaction{ _ ->
+            api.forEach {
+                it.settings = null
+            }
+        }
+        runController()
     }
 
     override fun onDestroy() {

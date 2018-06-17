@@ -11,4 +11,16 @@
     <string name="nav_header_title">Vaaya</string>
     <string name="nav_header_subtitle">Vaaya, Inc. </string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <string name="vaaya_nav_stats_title">Check Progress</string>
+    <string name="vaaya_nav_calendar_title">Calendar</string>
+    <string name="vaaya_nav_suggestions_title">Check</string>
+    <string name="vaaya_nav_help_title">Add</string>
+    <string name="vaaya_nav_settings_title">Settings</string>
+    <string name="vaaya_nav_logout_title">Logout</string>
+    <string name="vaaya_nav_about">About</string>
+
+    <string name="vaaya_login_btn_text">Login</string>
+    <string name="vaaya_login_password_hint">Password</string>
+    <string name="vaaya_login_email_hint">Email</string>
 </resources>

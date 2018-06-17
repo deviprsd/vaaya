@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/vaaya_nav_primary">
+        <item
+            android:id="@+id/vaaya_nav_stats"
+            android:icon="@drawable/ic_show_chart"
+            android:title="@string/vaaya_nav_stats_title" />
+        <item
+            android:id="@+id/vaaya_nav_calendar"
+            android:icon="@drawable/ic_date_range"
+            android:title="@string/vaaya_nav_calendar_title" />
+        <item
+            android:id="@+id/vaaya_nav_suggestions"
+            android:icon="@drawable/ic_check_box"
+            android:title="@string/vaaya_nav_suggestions_title" />
+        <item
+            android:id="@+id/vaaya_nav_help"
+            android:icon="@drawable/ic_local_hospital"
+            android:title="@string/vaaya_nav_help_title" />
+        <item
+            android:id="@+id/vaaya_nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/vaaya_nav_settings_title" />
+    </group>
+
+    <group android:id="@+id/vaaya_nav_misc">
+        <item
+            android:id="@+id/vaaya_nav_logout"
+            android:icon="@drawable/ic_exit_to_app"
+            android:title="@string/vaaya_nav_logout_title" />
+        <item
+            android:id="@+id/vaaya_nav_about"
+            android:icon="@drawable/ic_info"
+            android:title="@string/vaaya_nav_about" />
+    </group>
+
+</menu>

@@ -19,14 +19,14 @@ import kotlinx.android.synthetic.main.fragment_welcome.view.*
 
 class WelcomeActivity : VaayaActivity() {
 
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private var mWelcomePagerAdapter: WelcomePagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        container.adapter = mSectionsPagerAdapter
+        mWelcomePagerAdapter = WelcomePagerAdapter(supportFragmentManager)
+        container.adapter = mWelcomePagerAdapter
         indicator.setupWithViewPager(container, true)
 
         container.addOnPageChangeListener(WelcomePageListener())
@@ -44,9 +44,9 @@ class WelcomeActivity : VaayaActivity() {
         return
     }
 
-    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    inner class WelcomePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-        val texts = arrayOf(
+        private val texts = arrayOf(
                 "Welcome to <br><b>Vaaya</b>",
                 "We will <b>help</b> you track <b><i>Emotions</i></b>",
                 "<u>Balance</u> them <b>OUT</b>",
@@ -62,7 +62,7 @@ class WelcomeActivity : VaayaActivity() {
         }
     }
 
-    inner class WelcomePageListener(): ViewPager.SimpleOnPageChangeListener() {
+    inner class WelcomePageListener : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
             TransitionManager.beginDelayedTransition(welcome_main_content)
             when(position) {
@@ -93,7 +93,7 @@ class WelcomeActivity : VaayaActivity() {
         }
 
         companion object {
-            private val ARG_TEXT = "section_text"
+            private const val ARG_TEXT = "section_text"
 
             fun newInstance(text: String): WelcomeFragment {
                 val fragment = WelcomeFragment()
