@@ -82,4 +82,5 @@ open class VaayaActivity: AppCompatActivity() {
         super.onDestroy()
         realm.close()
     }
+
 }

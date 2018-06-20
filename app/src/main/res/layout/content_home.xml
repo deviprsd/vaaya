@@ -8,16 +8,14 @@
     tools:context=".HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
-    <TextView
-        android:id="@+id/textView2"
+
+    <FrameLayout
+        android:id="@+id/vaaya_home_page_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:text="Click on the add buttong to record your emotion (Not working)"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

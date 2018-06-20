@@ -20,6 +20,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/vaaya_menu_home" />
+        app:menu="@menu/vaaya_menu_home"
+        app:theme="@style/VaayaTheme.Ellipsis" />
 
 </android.support.v4.widget.DrawerLayout>
