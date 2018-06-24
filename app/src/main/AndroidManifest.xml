@@ -35,7 +35,6 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/VaayaTheme" />
-
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
@@ -44,6 +43,8 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="25a8c3aa6fabb7abe1ead3ed65d7b7a0bf804235" />
+
+        <activity android:name=".WhatIsUpActivity"></activity>
     </application>
 
 </manifest>

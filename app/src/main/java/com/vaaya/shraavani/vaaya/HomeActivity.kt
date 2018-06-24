@@ -3,7 +3,6 @@ package com.vaaya.shraavani.vaaya
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : VaayaActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val TIME_INTERVAL = 2000 // # milliseconds, desired time passed between two back presses.
+    private val TIME_INTERVAL = 2000
     private var mBackPressed: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +25,7 @@ class HomeActivity : VaayaActivity(), NavigationView.OnNavigationItemSelectedLis
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            startActivity(Intent(this@HomeActivity, WhatIsUpActivity::class.java))
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -40,6 +38,8 @@ class HomeActivity : VaayaActivity(), NavigationView.OnNavigationItemSelectedLis
         supportFragmentManager.addOnBackStackChangedListener {
             Log.i("testing", getCurrentFragment().tag)
         }
+
+        onNavigationItemSelected(nav_view.menu.getItem(0));
     }
 
     override fun onBackPressed() {
@@ -58,7 +58,10 @@ class HomeActivity : VaayaActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if(item.groupId == R.id.vaaya_nav_primary) title = item.title
+        if(item.groupId == R.id.vaaya_nav_primary) {
+            title = item.title
+            if(!item.isChecked) item.isChecked = true
+        }
 
         when (item.itemId) {
             R.id.vaaya_nav_stats -> replace(ProgressFragment.newInstance())

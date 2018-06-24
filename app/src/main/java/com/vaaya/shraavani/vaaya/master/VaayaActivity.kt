@@ -3,6 +3,7 @@ package com.vaaya.shraavani.vaaya.master
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.transition.Slide
@@ -15,6 +16,9 @@ import io.realm.Realm
 import java.io.IOException
 import java.util.*
 import kotlin.concurrent.schedule
+
+
+
 
 @SuppressLint("Registered")
 open class VaayaActivity: AppCompatActivity() {
@@ -76,6 +80,14 @@ open class VaayaActivity: AppCompatActivity() {
             }
         }
         runController()
+    }
+
+    fun convertPixelsToDp(px: Float): Float {
+        return Math.round(px / (Resources.getSystem().getDisplayMetrics().densityDpi / 160f)).toFloat()
+    }
+
+    fun convertDpToPixel(dp: Float): Float {
+        return Math.round(dp * (Resources.getSystem().getDisplayMetrics().densityDpi / 160f)).toFloat()
     }
 
     override fun onDestroy() {
