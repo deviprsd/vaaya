@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
 from .activities import MoodActivity
+from ..utilities import asset_path
 
 
 class SplashScreen():
@@ -52,7 +53,7 @@ class SplashScreen():
 
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
-        title, icon = kwargs.get('title', 'Vaaya'), kwargs.get('icon', 'vaaya.png')
+        title, icon = kwargs.get('title', 'Vaaya'), kwargs.get('icon', 'logo.ico')
         kwargs.pop('title', None)
         kwargs.pop('icon', None)
 
