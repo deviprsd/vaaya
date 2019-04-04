@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
 from .activities import MoodActivity
-from ..utilities import asset_path
+from .theme import Shraavani
 
 
 class SplashScreen():
@@ -73,11 +73,12 @@ class Application(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
     def show_frame(self, cont):
-
         frame = self.frames[cont]
         frame.tkraise()
 
     def setup(self, activities):
+        s = Shraavani()
+        s.apply()
         for F in activities:
             frame = F(self.container, self)
             self.frames[F] = frame
