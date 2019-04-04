@@ -65,26 +65,26 @@ class Application(tk.Tk):
             tk.Tk.iconbitmap(self, bitmap='@'+icon)
         tk.Tk.wm_title(self, title)
 
-        container = tk.Frame(self)
-        container.pack(side="top", fill="both", expand=True)
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
-
         self.frames = {}
 
-        for F in (MoodActivity,):
-            frame = F(container, self)
-            self.frames[F] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame(MoodActivity)
-
-        self.__center()
+        self.container = tk.Frame(self)
+        self.container.pack(side="top", fill="both", expand=True)
+        self.container.grid_rowconfigure(0, weight=1)
+        self.container.grid_columnconfigure(0, weight=1)
 
     def show_frame(self, cont):
 
         frame = self.frames[cont]
         frame.tkraise()
+
+    def setup(self, activities):
+        for F in activities:
+            frame = F(self.container, self)
+            self.frames[F] = frame
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(MoodActivity)
+        self.__center()
 
     def __center(self):
         self.eval('tk::PlaceWindow %s center' % self.winfo_toplevel())
