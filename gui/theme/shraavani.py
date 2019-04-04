@@ -1,29 +1,26 @@
 from tkinter import ttk
+import tkinter as tk
 
 
-class Colors():
-    primary = '#ABD3FB',
-    secondary = '#CCE4F4',
-    text = '#EBEFF2',
-    pm_dark = '#92B8D9',
+class Colors:
+    primary = '#ABD3FB'
+    secondary = '#CCE4F4'
+    re_prim = '#abd5fe'
+    text = '#EBEFF2'
+    pm_dark = '#92B8D9'
     pm_light = '#9CC4E8'
 
-class Shraavani():
+
+class Shraavani:
     def __init__(self):
         self.style = ttk.Style()
-        self.palette = {
-            'primary': '#ABD3FB',
-            'secondary': '#CCE4F4',
-            'text': '#EBEFF2',
-            'pm_dark': '#92B8D9',
-            'pm_light': '#9CC4E8'
-        }
 
     def apply(self):
         self.style.theme_create('shraavani', parent='default', settings={
             ".": {"configure": {"background": Colors.primary,
-                                "foreground": Colors.pm_dark,
+                                "foreground": Colors.text,
                                 "relief": "flat",
-                                "highlightcolor": Colors.text}},
+                                "highlightcolor": Colors.pm_dark}},
+            "Splash.Label": {"configure": {"background": Colors.re_prim}}
         })
         self.style.theme_use('shraavani')

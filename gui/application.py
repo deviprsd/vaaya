@@ -4,10 +4,10 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
 from .activities import MoodActivity
-from .theme import Shraavani
+from .theme import Shraavani, Colors
 
 
-class SplashScreen():
+class SplashScreen:
     def __init__(self, tk_root, imageFilename, minSplashTime=0):
         im = Image.open(imageFilename).crop((0, 300, 1400, 1000))
         im.thumbnail((500, 500), Image.ANTIALIAS)
@@ -16,6 +16,9 @@ class SplashScreen():
         self._image = ImageTk.PhotoImage(im)
         self._splash = None
         self._minSplashTime = time.time() + minSplashTime
+        self.status = None
+        s = Shraavani()
+        s.apply()
 
     def __enter__(self):
         # Remove the app window from the display
@@ -35,11 +38,14 @@ class SplashScreen():
         self._splash = tk.Toplevel(self._root)
         self._splash.overrideredirect(1)
         self._splash.geometry('+%d+%d' % (img_x_pos, img_y_pos))
+        self._splash.config(background=Colors.re_prim)
         ttk.Label(self._splash, image=self._image, cursor='watch').pack()
-        # ttk.Label(self._splash).pack()
+        self.status = ttk.Label(self._splash, text="Initializing ...", style='Splash.Label')
+        self.status.pack(pady=(0, 5))
 
         # Force Tk to draw the splash screen outside of mainloop()
         self._splash.update()
+        return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         # Make sure the minimum splash time has elapsed
@@ -49,6 +55,10 @@ class SplashScreen():
 
         self._splash.destroy()
         self._root.deiconify()
+
+    def status_update(self, msg):
+        self.status['text'] = msg
+        self._splash.update()
 
 
 class Application(tk.Tk):
@@ -77,8 +87,6 @@ class Application(tk.Tk):
         frame.tkraise()
 
     def setup(self, activities):
-        s = Shraavani()
-        s.apply()
         for F in activities:
             frame = F(self.container, self)
             self.frames[F] = frame
