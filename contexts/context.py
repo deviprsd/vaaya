@@ -1,2 +1,2 @@
 class Context:
-    nlp, db = None, None
+    nlp, db, app = None, None, None

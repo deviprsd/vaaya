@@ -11,11 +11,15 @@ import spacy
 
 def run():
     app = Application([])
+    x = None
 
-    with SplashScreen(app, asset_path('logo.jpg')) as sp:
+    with SplashScreen(app, asset_path('logo-splash.jpg')) as sp:
+        x = sp
+        sp.status_update('Initializing ...')
+        time.sleep(2)
         sp.status_update('Loading DataBase and settings ...')
         Context.db = SqliteDatabase('vaaya.db')
-        time.sleep(2)
+        time.sleep(3)
         sp.status_update('Loading module Spacy ...')
         try:
             Context.nlp = spacy.load('en_core_web_lg')
@@ -24,4 +28,8 @@ def run():
             download('en_core_web_lg')
             Context.nlp = spacy.load('en_core_web_lg')
 
-    app.exec_()
+    mood = MoodActivity()
+    mood.show()
+    x.finish(mood)
+
+    sys.exit(app.exec_())
