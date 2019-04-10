@@ -10,17 +10,18 @@ import spacy
 
 
 def run():
-    if sys.platform.startswith('win'):
-        app = Application(icon=asset_path('logo.jpg'))
-    else:
-        app = Application(icon=asset_path('vaaya.xbm'))
+    app = Application([])
 
-    with SplashScreen(app, asset_path('logo.jpg'), 2.0) as sp:
+    with SplashScreen(app, asset_path('logo.jpg')) as sp:
         sp.status_update('Loading DataBase and settings ...')
         Context.db = SqliteDatabase('vaaya.db')
         time.sleep(2)
         sp.status_update('Loading module Spacy ...')
-        Context.nlp = spacy.load('en_core_web_lg')
+        try:
+            Context.nlp = spacy.load('en_core_web_lg')
+        except IOError:
+            from spacy.cli import download
+            download('en_core_web_lg')
+            Context.nlp = spacy.load('en_core_web_lg')
 
-    app.setup((MoodActivity,))
-    app.mainloop()
+    app.exec_()
