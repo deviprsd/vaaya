@@ -12,7 +12,7 @@ class MoodActivity(QWidget):
     def __init__(self):
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.grid = QGridLayout()
-
+        self.setObjectName('')
         self.draw()
 
     def draw(self):
@@ -28,14 +28,14 @@ class MoodActivity(QWidget):
         for i, md in enumerate(btns_info):
             btn = QPushButton(' {}'.format(md.title()))
             btn.setIcon(QIcon(asset_path('vaaya_{}.gif'.format(md))))
-            btn.setObjectName('moodBtn')
+            btn.setObjectName('mood-btn')
             btn.setAutoRepeat(True)
             btn.setAutoRepeatDelay(500)
             btn.setAutoRepeatInterval(50)
 
             label = QLabel('0%')
             label.setAlignment(Qt.AlignCenter)
-            label.setObjectName('label{}'.format(md.title()))
+            label.setObjectName('mood-label-{}'.format(md.title()))
 
             btn.clicked.connect(partial(self.mood, btn, label))
             self.grid.addWidget(btn, 1, i + 1)
@@ -55,8 +55,8 @@ class MoodActivity(QWidget):
         model_args, lbl = {"log_time": datetime.now()}, None
         for i in range(self.grid.count()):
             lbl = self.grid.itemAt(i).widget()
-            if lbl.objectName().startswith('label'):
-                model_args[lbl.objectName()[5:].lower()] = int(lbl.text().strip('%'))
+            if isinstance(lbl, QLabel):
+                model_args[lbl.objectName()[lbl.objectName().rindex('-'):].lower()] = int(lbl.text().strip('%'))
 
         dms = DMoods(**model_args)
         dms.save()

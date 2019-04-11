@@ -17,12 +17,14 @@ def run():
         sp.status_update('Initializing ...')
         Context.set_app(app)
         time.sleep(2)
+
         sp.status_update('Loading DataBase and settings ...')
         Context.set_db(SqliteDatabase('vaaya.sqlite'))
         Context.get_db().connect(reuse_if_open=True)
         from vaaya.gui.models import DMoods
-        Context.get_db().create_tables([DMoods], safe=False)
-        time.sleep(3)
+        Context.get_db().create_tables([DMoods])
+        time.sleep(2)
+
         sp.status_update('Loading module Spacy ...')
         try:
             Context.set_nlp(spacy.load('en_core_web_lg'))

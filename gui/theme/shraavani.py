@@ -9,5 +9,14 @@ class Colors:
 
 class Shraavani:
     style_sheet = """
-    
-    """
+        QPushButton#mood-btn {
+            background-color: red;
+            border-style: outset;
+            border-width: 2px;
+            border-radius: 10px;
+            border-color: beige;
+            font: bold 14px;
+            min-width: 10em;
+            padding: 6px;
+        }
+    """#.format(primary=Colors.primary, secondary=Colors.secondary)
