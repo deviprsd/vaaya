@@ -1,25 +1,35 @@
-import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QApplication, QPushButton
 
 
-def window():
-    app = QApplication(sys.argv)
-    win = QWidget()
-    grid = QGridLayout()
+class Button(QPushButton):
+    def __init__(self, *args, **kwargs):
+        QPushButton.__init__(self, *args, **kwargs)
+        self.setAutoRepeat(True)
+        self.setAutoRepeatDelay(1000)
+        self.setAutoRepeatInterval(1000)
+        self.clicked.connect(self.handleClicked)
+        self._state = 0
 
-    for i in range(1, 5):
-        for j in range(1, 5):
-            grid.addWidget(QPushButton("B" + str(i) + str(j)), i, j)
-
-    win.setLayout(grid)
-    win.setGeometry(100, 100, 200, 100)
-    win.setWindowTitle("PyQt")
-    win.show()
-    sys.exit(app.exec_())
+    def handleClicked(self):
+        if self.isDown():
+            if self._state == 0:
+                self._state = 1
+                self.setAutoRepeatInterval(50)
+                print('press')
+            else:
+                print('repeat')
+        elif self._state == 1:
+            self._state = 0
+            self.setAutoRepeatInterval(1000)
+            print('release')
+        else:
+            print('click')
 
 
 if __name__ == '__main__':
-    window()
 
+    import sys
+    app = QApplication(sys.argv)
+    button = Button('Test Button')
+    button.show()
+    sys.exit(app.exec_())

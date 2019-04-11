@@ -1,3 +1,5 @@
-from .vaaya import run
+__package__ = 'vaaya'
+
+from vaaya.runner import run
 
 run()
