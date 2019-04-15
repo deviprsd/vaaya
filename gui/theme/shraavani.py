@@ -1,3 +1,6 @@
+from utilities import asset_path
+
+
 class Colors:
     primary = '#ABD3FB'
     secondary = '#CCE4F4'
@@ -8,15 +11,20 @@ class Colors:
 
 
 class Shraavani:
-    style_sheet = """
-        QPushButton#mood-btn {
-            background-color: red;
-            border-style: outset;
-            border-width: 2px;
-            border-radius: 10px;
-            border-color: beige;
-            font: bold 14px;
-            min-width: 10em;
-            padding: 6px;
-        }
-    """#.format(primary=Colors.primary, secondary=Colors.secondary)
+    @classmethod
+    def style_sheet(self):
+        f = open(asset_path('qcss/shraavani.qcss'))
+        try:
+            qcss = f.read().format(
+                primary=Colors.primary,
+                secondary=Colors.secondary,
+                text=Colors.text,
+                re_prim=Colors.re_prim,
+                pm_dark=Colors.pm_dark,
+                pm_light=Colors.pm_light
+            )
+        except KeyError:
+            qcss = ""
+        f.close()
+        print(qcss or "Some error")
+        return qcss

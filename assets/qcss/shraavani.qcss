@@ -1,0 +1,26 @@
+QWidget#mood-activity {{
+    background-color: {primary};
+}}
+
+QPushButton[class="mood-btn"] {{
+    background-color: {text};
+    border-width: 1px;
+    border-radius: 25px;
+    border-color: {primary};
+    padding: 15px;
+    icon-size: 40px;
+}}
+
+QPushButton#mood-btn-ok {{
+    padding: 6px;
+    border-radius: 10px;
+    margin-top: 15px;
+}}
+
+QLabel[class="mood-label"] {{
+    background-color: {pm_dark};
+    color: {text};
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 4px 2px;
+}}

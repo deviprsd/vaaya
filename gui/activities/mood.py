@@ -12,7 +12,7 @@ class MoodActivity(QWidget):
     def __init__(self):
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.grid = QGridLayout()
-        self.setObjectName('')
+        self.setObjectName('mood-activity')
         self.draw()
 
     def draw(self):
@@ -26,16 +26,18 @@ class MoodActivity(QWidget):
 
     def __add_btns(self, btns_info):
         for i, md in enumerate(btns_info):
-            btn = QPushButton(' {}'.format(md.title()))
+            btn = QPushButton(text='')
             btn.setIcon(QIcon(asset_path('vaaya_{}.gif'.format(md))))
-            btn.setObjectName('mood-btn')
+            btn.setObjectName('mood-btn-{}'.format(md))
+            btn.setProperty('class', 'mood-btn')
             btn.setAutoRepeat(True)
             btn.setAutoRepeatDelay(500)
             btn.setAutoRepeatInterval(50)
 
             label = QLabel('0%')
             label.setAlignment(Qt.AlignCenter)
-            label.setObjectName('mood-label-{}'.format(md.title()))
+            label.setObjectName('mood-label-{}'.format(md))
+            label.setProperty('class', 'mood-label')
 
             btn.clicked.connect(partial(self.mood, btn, label))
             self.grid.addWidget(btn, 1, i + 1)
@@ -43,6 +45,8 @@ class MoodActivity(QWidget):
 
         ok_btn = QPushButton('OK ...')
         ok_btn.setAutoDefault(True)
+        ok_btn.setObjectName('mood-btn-ok')
+        ok_btn.setProperty('class', 'mood-btn')
         self.grid.addWidget(ok_btn, 3, len(btns_info))
         ok_btn.clicked.connect(self.save_mood_data)
 
@@ -56,7 +60,7 @@ class MoodActivity(QWidget):
         for i in range(self.grid.count()):
             lbl = self.grid.itemAt(i).widget()
             if isinstance(lbl, QLabel):
-                model_args[lbl.objectName()[lbl.objectName().rindex('-'):].lower()] = int(lbl.text().strip('%'))
+                model_args[lbl.objectName().split('-')[2]] = int(lbl.text().strip('%'))
 
         dms = DMoods(**model_args)
         dms.save()

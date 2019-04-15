@@ -12,4 +12,4 @@ class DMoods(Model):
     surprised = IntegerField()
 
     class Meta:
-        database = Context.get_db()
+        database = Context.db
