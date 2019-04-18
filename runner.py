@@ -38,6 +38,7 @@ def run():
         try:
             Context.nlp = spacy.load('en_core_web_lg')
         except IOError:
+            sp.status_update('Downloading Spacy dependencies (est. 826 mb in size')
             from spacy.cli import download
             download('en_core_web_lg')
             Context.nlp = spacy.load('en_core_web_lg')

@@ -47,6 +47,7 @@ class MoodActivity(QWidget):
         ok_btn.setAutoDefault(True)
         ok_btn.setObjectName('mood-btn-ok')
         ok_btn.setProperty('class', 'mood-btn')
+        #clear
         self.grid.addWidget(ok_btn, 3, len(btns_info))
         ok_btn.clicked.connect(self.save_mood_data)
 
