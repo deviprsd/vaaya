@@ -25,8 +25,10 @@ class MoodActivity(QWidget):
         self.move(screen_center(self))
 
     def __add_btns(self, btns_info):
+        lbls, btns = [], []
         for i, md in enumerate(btns_info):
             btn = QPushButton(text='')
+            btns.append(btn)
             btn.setIcon(QIcon(asset_path('vaaya_{}.gif'.format(md))))
             btn.setObjectName('mood-btn-{}'.format(md))
             btn.setProperty('class', 'mood-btn')
@@ -35,6 +37,7 @@ class MoodActivity(QWidget):
             btn.setAutoRepeatInterval(50)
 
             label = QLabel('0%')
+            lbls.append(label)
             label.setAlignment(Qt.AlignCenter)
             label.setObjectName('mood-label-{}'.format(md))
             label.setProperty('class', 'mood-label')
@@ -49,32 +52,31 @@ class MoodActivity(QWidget):
         ok_btn.setAutoDefault(True)
         ok_btn.setObjectName('mood-btn-ok')
         ok_btn.setProperty('class', 'mood-btn')  # This is how use the css styling for a group of objects
+
         clear_btn = QPushButton('Clear ...')
         clear_btn.setObjectName('mood-btn-ok')  # Maybe this should be mood-btn (they should look the same?)
         clear_btn.setProperty('class', 'mood-btn')
+
         self.grid.addWidget(ok_btn, 3, len(btns_info))
         self.grid.addWidget(clear_btn, 3, 1)
-        clear_btn.clicked.connect(partial(self.clear, self.grid.findChildren(QLabel)))
-        ok_btn.clicked.connect(self.save_mood_data)
+
+        clear_btn.clicked.connect(partial(self.clear, lbls))
+        ok_btn.clicked.connect(partial(self.save_mood_data, lbls))
 
     @pyqtSlot()
     def clear(self, labels):
-        for i in range(self.grid.count()):
-            lbl = self.grid.itemAt(i).widget()
-            if isinstance(lbl, QLabel):
-                lbl.setText('0%')
+        for lbl in labels:
+            lbl.setText('0%')
 
     @pyqtSlot()
     def mood(self, btn, label):
         label.setText('{}%'.format(min(int(label.text().strip('%')) + 1, 100)))
 
     @pyqtSlot()
-    def save_mood_data(self):
+    def save_mood_data(self, labels):
         model_args, lbl = {"log_time": datetime.now()}, None
-        for i in range(self.grid.count()):
-            lbl = self.grid.itemAt(i).widget()
-            if isinstance(lbl, QLabel):
-                model_args[lbl.objectName().split('-')[2]] = int(lbl.text().strip('%'))
+        for lbl in labels:
+            model_args[lbl.objectName().split('-')[2]] = int(lbl.text().strip('%'))
 
         dms = DMoods(**model_args)
         dms.save()
