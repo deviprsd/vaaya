@@ -39,21 +39,34 @@ class MoodActivity(QWidget):
             label.setObjectName('mood-label-{}'.format(md))
             label.setProperty('class', 'mood-label')
 
+            # Update the percentages on button click
             btn.clicked.connect(partial(self.mood, btn, label))
             self.grid.addWidget(btn, 1, i + 1)
             self.grid.addWidget(label, 2, i + 1)
 
+        # Make ok and clear buttons
         ok_btn = QPushButton('OK ...')
         ok_btn.setAutoDefault(True)
         ok_btn.setObjectName('mood-btn-ok')
-        ok_btn.setProperty('class', 'mood-btn')
-        #clear
+        ok_btn.setProperty('class', 'mood-btn')  # This is how use the css styling for a group of objects
+        clear_btn = QPushButton('Clear ...')
+        clear_btn.setObjectName('mood-btn-ok')  # Maybe this should be mood-btn (they should look the same?)
+        clear_btn.setProperty('class', 'mood-btn')
         self.grid.addWidget(ok_btn, 3, len(btns_info))
+        self.grid.addWidget(clear_btn, 3, 1)
+        clear_btn.clicked.connect(partial(self.clear, self.grid.findChildren(QLabel)))
         ok_btn.clicked.connect(self.save_mood_data)
 
     @pyqtSlot()
+    def clear(self, labels):
+        for i in range(self.grid.count()):
+            lbl = self.grid.itemAt(i).widget()
+            if isinstance(lbl, QLabel):
+                lbl.setText('0%')
+
+    @pyqtSlot()
     def mood(self, btn, label):
-        label.setText('{}%'.format(int(label.text().strip('%')) + 1))
+        label.setText('{}%'.format(min(int(label.text().strip('%')) + 1, 100)))
 
     @pyqtSlot()
     def save_mood_data(self):
