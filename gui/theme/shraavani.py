@@ -1,4 +1,4 @@
-from utilities import asset_path
+from vaaya.utilities import asset_path
 
 
 class Colors:
