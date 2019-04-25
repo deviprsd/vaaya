@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel
 from vaaya.utilities import asset_path, screen_center
 from vaaya.gui.models import DMoods
+from vaaya.gui.activities.mood_entry import MoodEntry
 
 
 class MoodActivity(QWidget):
@@ -62,6 +63,7 @@ class MoodActivity(QWidget):
 
         clear_btn.clicked.connect(partial(self.clear, lbls))
         ok_btn.clicked.connect(partial(self.save_mood_data, lbls))
+        ok_btn.clicked.connect(self.open_entry)
 
     @pyqtSlot()
     def clear(self, labels):
@@ -71,6 +73,11 @@ class MoodActivity(QWidget):
     @pyqtSlot()
     def mood(self, btn, label):
         label.setText('{}%'.format(min(int(label.text().strip('%')) + 1, 100)))
+
+    @pyqtSlot()
+    def open_entry(self):
+        m = MoodEntry()
+        m.show()
 
     @pyqtSlot()
     def save_mood_data(self, labels):

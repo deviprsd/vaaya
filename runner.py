@@ -51,6 +51,8 @@ def run():
             Context.nlp = spacy.load('en_core_web_lg')
 
         from vaaya.gui.activities import MoodActivity
+
+        # Add mood entry import here (on ok... button click)
         sp.set_after(MoodActivity())
 
     app.exec_()
