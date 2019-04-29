@@ -4,22 +4,19 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QBoxLayout, QPlai
 from vaaya.gui.models import DMoods
 from vaaya.utilities import asset_path, screen_center
 
+
 # Have a view previous entries on the main page, that way this can just be an entry
+# Known needs:
+# Do something with adding to the Application. Idk how this works
+# Add CSS styling
+# Add code to show on button click (Ok...) button
 
 class MoodEntry(QWidget):
-    import sys
-    from PyQt5.QtCore import *
-    from PyQt5.QtGui import *
-    from PyQt5.QtWidgets import *
-
-    # Known needs:
-    # Do something with adding to the Application. Idk how this works
-    # Add CSS styling
-    # Add code to show on button click (Ok...) button
-
     def __init__(self):
         self.window = QWidget()
+        #super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.window.setWindowTitle('Describe your day.')
+        self.setObjectName('mood-activity')
         self.hbox = QHBoxLayout()
         self.vbox = QVBoxLayout()
         self.entry = QPlainTextEdit(self.window)
@@ -40,14 +37,15 @@ class MoodEntry(QWidget):
         self.vbox.addWidget(self.entry)
         self.vbox.addLayout(self.hbox)
         self.window.setLayout(self.vbox)
+        #self.setLayout(self.vbox)
 
     def show(self):
-        # self.window.show() Which one?? Idk
-        # super.show()
+        self.window.show()  # Which one?? Idk
+        #super().show()
         self.move(screen_center(self))
 
     def open_entries(self):
-        # Open the other gui for analytics (maybe just a list of previous entries?
+        # Open the other gui for analytics (maybe just a list of previous entries?)
         pass
 
     def save_data(self):
