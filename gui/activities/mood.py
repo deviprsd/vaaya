@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel
 from vaaya.utilities import asset_path, screen_center
 from vaaya.gui.models import DMoods
+from vaaya.gui.activities.mood_entry import MoodEntry
 
 
 class MoodActivity(QWidget):

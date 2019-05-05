@@ -27,11 +27,11 @@ class MoodEntry(QWidget):
 
     def draw(self):
         view_btn = QPushButton('View Entries')
-        view_btn.setObjectName('mood-btn-view')
+        view_btn.setObjectName('mood-btn-ok')
         view_btn.setProperty('class', 'mood-btn')
-        # view_btn.clicked.connect()
+        view_btn.clicked.connect(self.open_entries)
         save_btn = QPushButton('Save Entry')
-        save_btn.setObjectName('mood-btn-save')
+        save_btn.setObjectName('mood-btn-ok')
         save_btn.setProperty('class', 'mood-btn')
         save_btn.clicked.connect(self.save_data)
         self.hbox.addWidget(view_btn)
@@ -48,7 +48,8 @@ class MoodEntry(QWidget):
     @pyqtSlot()
     def open_entries(self):
         # Open the other gui for analytics (maybe just a list of previous entries?)
-        pass
+        self.parent().parent().set_page(2) # after adding the new one to the list
+        # pass
 
     @pyqtSlot()
     def save_data(self):
