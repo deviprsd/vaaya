@@ -1,4 +1,4 @@
-QWidget#mood-activity {{
+QWidget[class="ctm-widget"] {{
     background-color: {primary};
 }}
 
@@ -23,4 +23,5 @@ QLabel[class="mood-label"] {{
     border-width: 1px;
     border-radius: 6px;
     padding: 4px 2px;
+    max-height: 25px;
 }}

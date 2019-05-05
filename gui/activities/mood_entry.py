@@ -13,13 +13,15 @@ from vaaya.utilities import asset_path, screen_center
 
 class MoodEntry(QWidget):
     def __init__(self):
-        self.window = QWidget()
-        #super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
-        self.window.setWindowTitle('Describe your day.')
-        self.setObjectName('mood-activity')
+        # self.window = QWidget()
+        super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
+        self.setFocusPolicy(Qt.StrongFocus)
+        self.setAttribute(Qt.WA_QuitOnClose, True)
+        self.setWindowTitle('Describe your day.')
+        self.setObjectName('entry-activity')
         self.hbox = QHBoxLayout()
         self.vbox = QVBoxLayout()
-        self.entry = QPlainTextEdit(self.window)
+        self.entry = QPlainTextEdit()
         self.draw()
 
     def draw(self):
@@ -36,12 +38,12 @@ class MoodEntry(QWidget):
         self.hbox.addWidget(save_btn)
         self.vbox.addWidget(self.entry)
         self.vbox.addLayout(self.hbox)
-        self.window.setLayout(self.vbox)
+        self.setLayout(self.vbox)
         #self.setLayout(self.vbox)
 
     def show(self):
-        self.window.show()  # Which one?? Idk
-        #super().show()
+        #self.window.show()  # Which one?? Idk
+        super().show()
         self.move(screen_center(self))
 
     def open_entries(self):

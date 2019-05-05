@@ -13,4 +13,3 @@ class Preprocessor:
         elif item == 'doc':
             return self.__je
         return None
-

@@ -6,13 +6,12 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel
 from vaaya.utilities import asset_path, screen_center
 from vaaya.gui.models import DMoods
-from vaaya.gui.activities.mood_entry import MoodEntry
 
 
 class MoodActivity(QWidget):
-    def __init__(self):
-        super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
-        self.grid = QGridLayout()
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.grid = QGridLayout(self)
         self.setObjectName('mood-activity')
         self.draw()
 
@@ -20,6 +19,7 @@ class MoodActivity(QWidget):
         self.__add_btns(['smiley', 'sad', 'angry', 'disgusted', 'fear', 'surprised'])
         self.setWindowTitle('How are you feeling today?')
         self.setLayout(self.grid)
+        self.setGeometry(0, 0, 450, 200)
 
     def show(self):
         super().show()
@@ -28,7 +28,7 @@ class MoodActivity(QWidget):
     def __add_btns(self, btns_info):
         lbls, btns = [], []
         for i, md in enumerate(btns_info):
-            btn = QPushButton(text='')
+            btn = QPushButton(text='', parent=self)
             btns.append(btn)
             btn.setIcon(QIcon(asset_path('vaaya_{}.gif'.format(md))))
             btn.setObjectName('mood-btn-{}'.format(md))
@@ -37,7 +37,7 @@ class MoodActivity(QWidget):
             btn.setAutoRepeatDelay(500)
             btn.setAutoRepeatInterval(50)
 
-            label = QLabel('0%')
+            label = QLabel('0%', parent=self)
             lbls.append(label)
             label.setAlignment(Qt.AlignCenter)
             label.setObjectName('mood-label-{}'.format(md))
@@ -49,12 +49,12 @@ class MoodActivity(QWidget):
             self.grid.addWidget(label, 2, i + 1)
 
         # Make ok and clear buttons
-        ok_btn = QPushButton('OK ...')
+        ok_btn = QPushButton('OK ...', self)
         ok_btn.setAutoDefault(True)
         ok_btn.setObjectName('mood-btn-ok')
         ok_btn.setProperty('class', 'mood-btn')  # This is how use the css styling for a group of objects
 
-        clear_btn = QPushButton('Clear ...')
+        clear_btn = QPushButton('Clear ...', self)
         clear_btn.setObjectName('mood-btn-ok')  # Maybe this should be mood-btn (they should look the same?)
         clear_btn.setProperty('class', 'mood-btn')
 
@@ -76,8 +76,7 @@ class MoodActivity(QWidget):
 
     @pyqtSlot()
     def open_entry(self):
-        m = MoodEntry()
-        m.show()
+        self.parent().parent().set_page(1)
 
     @pyqtSlot()
     def save_mood_data(self, labels):
