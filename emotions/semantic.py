@@ -17,7 +17,6 @@ class Semantic:
 
     def emotion_vector(self, nava):
         _t_pm = np.array([self.__pmi(nava, em) for em in Semantic.__emotions_concepts.keys()])
-        print(nava, nava.pos_, _t_pm)
         return _t_pm
 
     def __pmi(self, nava, emotion):

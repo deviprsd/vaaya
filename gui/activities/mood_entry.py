@@ -1,8 +1,10 @@
+from datetime import datetime
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QBoxLayout, QPlainTextEdit, QPushButton, QLabel
-from vaaya.gui.models import DMoods
-from vaaya.utilities import asset_path, screen_center
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPlainTextEdit, QPushButton
+from vaaya.gui.models import JrnEntry
+from vaaya.utilities import screen_center, NumpyEncoder
+from vaaya.emotions import Analyzer
+import json
 
 
 # Have a view previous entries on the main page, that way this can just be an entry
@@ -13,7 +15,6 @@ from vaaya.utilities import asset_path, screen_center
 
 class MoodEntry(QWidget):
     def __init__(self):
-        # self.window = QWidget()
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.setFocusPolicy(Qt.StrongFocus)
         self.setAttribute(Qt.WA_QuitOnClose, True)
@@ -39,19 +40,23 @@ class MoodEntry(QWidget):
         self.vbox.addWidget(self.entry)
         self.vbox.addLayout(self.hbox)
         self.setLayout(self.vbox)
-        #self.setLayout(self.vbox)
 
     def show(self):
-        #self.window.show()  # Which one?? Idk
         super().show()
         self.move(screen_center(self))
 
+    @pyqtSlot()
     def open_entries(self):
         # Open the other gui for analytics (maybe just a list of previous entries?)
         pass
 
+    @pyqtSlot()
     def save_data(self):
         user_entry = self.entry.toPlainText()
-        print(user_entry)
-    # Send the data to the data base
-    # Have a future method to send the data to previous entry storage
+        analysis = Analyzer(user_entry).analyze()
+        jen = JrnEntry(**{
+            "log_time": datetime.now(),
+            "journal": user_entry,
+            "analysis": json.dumps(analysis, cls=NumpyEncoder)
+        })
+        jen.save()

@@ -37,8 +37,8 @@ def run():
         sp.status_update('Loading DataBase and settings ...')
         Context.db = SqliteDatabase('vaaya.sqlite')
         Context.db.connect(reuse_if_open=True)
-        from vaaya.gui.models import DMoods
-        Context.db.create_tables([DMoods])
+        from vaaya.gui.models import DMoods, JrnEntry
+        Context.db.create_tables([DMoods, JrnEntry])
         time.sleep(1)
 
         sp.status_update('Loading module Spacy ...')

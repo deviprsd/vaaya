@@ -26,5 +26,4 @@ class Shraavani:
         except KeyError:
             qcss = ""
         f.close()
-        print(qcss or "Some error")
         return qcss
