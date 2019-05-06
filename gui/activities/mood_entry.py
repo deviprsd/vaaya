@@ -1,17 +1,11 @@
 from datetime import datetime
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPlainTextEdit, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPlainTextEdit, QPushButton, QMessageBox
 from vaaya.gui.models import JrnEntry
 from vaaya.utilities import screen_center, NumpyEncoder
 from vaaya.emotions import Analyzer
 import json
 
-
-# Have a view previous entries on the main page, that way this can just be an entry
-# Known needs:
-# Do something with adding to the Application. Idk how this works
-# Add CSS styling
-# Add code to show on button click (Ok...) button
 
 class MoodEntry(QWidget):
     def __init__(self):
@@ -34,6 +28,7 @@ class MoodEntry(QWidget):
         save_btn.setObjectName('mood-btn-ok')
         save_btn.setProperty('class', 'mood-btn')
         save_btn.clicked.connect(self.save_data)
+        save_btn.clicked.connect(self.save_success)
         self.hbox.addWidget(view_btn)
         self.hbox.addStretch()
         self.hbox.addWidget(save_btn)
@@ -48,7 +43,7 @@ class MoodEntry(QWidget):
     @pyqtSlot()
     def open_entries(self):
         # Open the other gui for analytics (maybe just a list of previous entries?)
-        self.parent().parent().set_page(2) # after adding the new one to the list
+        self.parent().parent().set_page(1) # after adding the new one to the list
         # pass
 
     @pyqtSlot()
@@ -61,3 +56,6 @@ class MoodEntry(QWidget):
             "analysis": json.dumps(analysis, cls=NumpyEncoder)
         })
         jen.save()
+
+    def save_success(self):
+        QMessageBox.about(self, ' ', "Saved Successfully!")

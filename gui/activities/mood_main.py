@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QStackedWidget, QHBoxLayout, QWidget, QVBoxLayout
 from utilities import screen_center
-from vaaya.gui.activities import MoodActivity
+from vaaya.gui.activities import MoodActivity, MoodAnalytics
 
 
 class MoodStackedActivity(QWidget):
@@ -40,7 +40,7 @@ class MoodMainActivity(QMainWindow):
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.stacker = QStackedWidget(self)
         self.stacker.setProperty('class', 'ctm-widget')
-        self.widgets = [MoodActivity(self), MoodStackedActivity(widgets, self)]
+        self.widgets = [MoodActivity(self), MoodStackedActivity(widgets, self), MoodActivity(self)]
 
         for w in self.widgets:
             self.stacker.addWidget(w)
