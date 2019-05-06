@@ -53,10 +53,10 @@ class MoodActivity(QWidget):
         ok_btn = QPushButton('OK ...', self)
         ok_btn.setAutoDefault(True)
         ok_btn.setObjectName('mood-btn-ok')
-        ok_btn.setProperty('class', 'mood-btn')  # This is how use the css styling for a group of objects
+        ok_btn.setProperty('class', 'mood-btn')
 
         clear_btn = QPushButton('Clear ...', self)
-        clear_btn.setObjectName('mood-btn-ok')  # Maybe this should be mood-btn (they should look the same?)
+        clear_btn.setObjectName('mood-btn-ok')
         clear_btn.setProperty('class', 'mood-btn')
 
         self.grid.addWidget(ok_btn, 3, len(btns_info))

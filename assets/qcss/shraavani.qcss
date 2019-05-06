@@ -17,6 +17,14 @@ QPushButton#mood-btn-ok {{
     margin-top: 15px;
 }}
 
+QPushButton[class="mood-btn-clear"] {{
+    background-color: {pm_dark};
+    border-width: 1px;
+    border-radius: 25px;
+    border-color: {primary};
+    padding: 40px;
+}}
+
 QLabel[class="mood-label"] {{
     background-color: {pm_dark};
     color: {text};
