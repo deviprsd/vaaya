@@ -16,6 +16,7 @@ import json
 # add ml data. Format this with the moods and text entry
 # Add comments
 
+
 class MoodAnalytics(QWidget):
     def __init__(self):  # Need to take in DB as parameter?
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
@@ -25,6 +26,12 @@ class MoodAnalytics(QWidget):
         self.draw()
 
     def draw(self):
+        """
+        Creates screen containing entries
+        Creates back and delete all entries button, sets labels
+        Displays entries with creation date, and log number
+        :return:
+        """
         self.add_entries()
         self.setWindowTitle('Click an Entry')
         self.setLayout(self.grid) # self.grid
@@ -35,6 +42,13 @@ class MoodAnalytics(QWidget):
         self.move(screen_center(self))
 
     def add_entries(self):
+        """
+        Adds and stores user diary entry
+        Sets log time
+        Displays parsed log with associated emotions
+        Displays confidence level in analyzed emotions
+        :return:
+        """
         backbtn = QPushButton(text='Back', parent=self)
         backbtn.setObjectName('mood-btn-ok')
         backbtn.setProperty('class', 'mood-btn-clear')
@@ -60,6 +74,12 @@ class MoodAnalytics(QWidget):
             self.grid.addWidget(dltbtn, i + 1, 1)
 
     def show_entries(self, date):
+        """
+        Displays diary entries
+        Includes log number and time of creation
+        :param date:
+        :return:
+        """
         data = JrnEntry.get(JrnEntry.log_time == date)
         Context.cvj = data
         self.parent().parent().set_page(2)
@@ -67,23 +87,46 @@ class MoodAnalytics(QWidget):
         # ADD ML DATA HERE
 
     def delete_entry(self, date):
+        """
+        Deletes diary entry
+        Used in delete all entries button
+        :param date:
+        :return:
+        """
         data = JrnEntry.get(JrnEntry.log_time == date)
         data.delete_instance()
         self.update()
 
     def update(self):
+        """
+        Updates diary entries based on deleted logs
+        :return:
+        """
         self.clear_grid()
         self.add_entries()
         super().update()
 
     def clear_grid(self):
+        """
+        Method to clearing grids for GUI
+        :return:
+        """
         while self.grid.count():
             child = self.grid.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
 
     def go_back(self):
+        """
+        Return to screen viewing all entries if viewing a specific log
+        Return to entry screen if already viewing all logs
+        :return:
+        """
         self.parent().parent().set_page(0)
 
     def delete_all_entries(self):
+        """
+        delete all diary entries
+        :return:
+        """
         pass

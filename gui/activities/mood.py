@@ -17,6 +17,10 @@ class MoodActivity(QWidget):
         self.draw()
 
     def draw(self):
+        """
+        Function that create emotion visual
+        :return:
+        """
         self.__add_btns(['smiley', 'sad', 'angry', 'disgusted', 'fear', 'surprised'])
         self.setWindowTitle('How are you feeling today?')
         self.setLayout(self.grid)
@@ -27,6 +31,13 @@ class MoodActivity(QWidget):
         self.move(screen_center(self))
 
     def __add_btns(self, btns_info):
+        """
+        Creates ok, clear and mood buttons
+        sets button labels
+        Updates percentages on button click
+        :param btns_info:
+        :return:
+        """
         lbls, btns = [], []
         for i, md in enumerate(btns_info):
             btn = QPushButton(text='', parent=self)
@@ -68,19 +79,40 @@ class MoodActivity(QWidget):
 
     @pyqtSlot()
     def clear(self, labels):
+        """
+        Clears labels
+        Used for deleting entries
+        :param labels:
+        :return:
+        """
         for lbl in labels:
             lbl.setText('0%')
 
     @pyqtSlot()
     def mood(self, btn, label):
+        """
+        Sets label to appropriate mood
+        :param btn:
+        :param label:
+        :return:
+        """
         label.setText('{}%'.format(min(int(label.text().strip('%')) + 1, 100)))
 
     @pyqtSlot()
     def open_entry(self):
+        """
+        Opens diary entry from entries page
+        :return:
+        """
         self.parent().parent().set_page(1)
 
     @pyqtSlot()
     def save_mood_data(self, labels):
+        """
+        Sets the log time, saves appropriate mood label
+        :param labels:
+        :return:
+        """
         model_args, lbl, vec = {"log_time": datetime.now()}, None, []
         for lbl in labels:
             vec.append(int(lbl.text().strip('%')))

@@ -16,6 +16,10 @@ class Analyzer:
         self._sent_em, self._doc_em = None, None
 
     def analyze(self):
+        """
+        Breaks up text to be analyzed
+        :return:
+        """
         self.__analyze_syntactic(
             VERBE=self._ve, ADJE=self._ae, ADVE=self._ade, NOUNE=self._ne,
             VERB=self.__analyzer.verbs, ADJ=self.__analyzer.adjectives,
@@ -28,6 +32,11 @@ class Analyzer:
         return self._sent_em, self._doc_em
 
     def __analyze_syntactic(self, **kwargs):
+        """
+        analyzes section of text
+        :param kwargs:
+        :return:
+        """
         _ng = self.__analyzer.neg
         _ac = self.__analyzer.acomp
         _am = self.__analyzer.amod
@@ -38,6 +47,14 @@ class Analyzer:
             map(partial(self.__context_modifiers, i=idx, neg=True, **kwargs), _ng[idx])
 
     def __context_modifiers(self, deps, i, neg=False, **kwargs):
+        """
+        For calculating emotion vectors
+        :param deps:
+        :param i:
+        :param neg:
+        :param kwargs:
+        :return:
+        """
         for dep in deps:
             if dep[0].pos_ not in self.POS: continue
             idxd, idxi = kwargs[dep[0].pos_][i].index(dep[0]), kwargs[dep[1].pos_][i].index(dep[1])
@@ -46,6 +63,11 @@ class Analyzer:
             kwargs[dep[0].pos_ + 'E'][i][idxd] = rvec
 
     def __sentence_emotion(self, i):
+        """
+        For calculating emotion vectors
+        :param i:
+        :return:
+        """
         _s, _len = np.zeros((1, 6)), 0
         for arg in [self._ve[i], self._ae[i], self._ade[i], self._ne[i]]:
             _len += len(arg)

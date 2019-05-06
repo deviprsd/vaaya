@@ -12,12 +12,24 @@ class Confidence:
         ).order_by(DMoods.log_time.asc())
 
     def __get_dmoods(self):
-        return [np.array([d.smiley, d.sad, d.angry, d.disgusted, d.fear, d.surprised]) for d in list(self.__dm)]
+        """
+        gets emotion
+        :return:
+        """
+        return [np.array([d.smiley, d.sad, d.angry, d.fear, d.surprised, d.disgusted]) for d in list(self.__dm)]
 
     def __get_sent_em(self):
+        """
+        gets sent emotion
+        :return:
+        """
         return [np.array(ja[0]) for ja in json.loads(self.__je.analysis)]
 
     def __calc_aggregate(self):
+        """
+        Used for calculating confidence in analyzed emotion
+        :return:
+        """
         dm_vec = np.zeros((1, 6))
         dms = self.__get_dmoods()
         print(dms)
@@ -28,8 +40,13 @@ class Confidence:
         return dm_vec
 
     def confidence_percentage(self, i):
+        """
+        Used for calculating confidence in analyzed emotion
+        :param i:
+        :return:
+        """
         aggr = self.__calc_aggregate()
         sms = self.__get_sent_em()
 
-        print(sms[i])
+        #print(sms[i])
         return str(np.std(sms[i], axis=0) * 1000) + '%'

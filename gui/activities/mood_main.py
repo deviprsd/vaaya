@@ -6,6 +6,13 @@ from vaaya.gui.activities import MoodActivity, MoodAnalytics
 
 class MoodStackedActivity(QWidget):
     def __init__(self, widgets, main):
+        """
+        Mood main function
+        Responsible for calling mood_entry, mood_analytics, and mood
+        Stores to mood_userdata
+        :param widgets:
+        :param main:
+        """
         super().__init__()
         self.widgets = widgets
         self.win = main
@@ -27,9 +34,18 @@ class MoodStackedActivity(QWidget):
         self.move(screen_center(self))
 
     def windowTitle(self):
+        """
+        Used in creating windows
+        :return:
+        """
         return self.widgets[self.stacker.currentIndex()].windowTitle()
 
     def set_page(self, i):
+        """
+        Function used to set page number
+        :param i:
+        :return:
+        """
         if not i < len(self.widgets): return
         self.win.setWindowTitle(self.widgets[i].windowTitle())
         self.stacker.setCurrentIndex(i)

@@ -28,9 +28,12 @@ class MoodData(QWidget):
         super().show()
         self.move(screen_center(self))
 
-    # Fill the GUI
     def add_data(self):
-        __emts = ['happy', 'sad', 'angry', 'disgusted', 'fear', 'suprise']
+        """
+        Fill the GUI
+        :return:
+        """
+        __emts = ['happy', 'sad', 'angry', 'fear', 'suprise', 'disgusted']
         backbtn = QPushButton(text='Back', parent=self)
         backbtn.setObjectName('mood-btn-ok')
         backbtn.setProperty('class', 'mood-btn-clear')

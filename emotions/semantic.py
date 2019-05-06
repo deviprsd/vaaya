@@ -16,10 +16,22 @@ class Semantic:
         self.__sync = syntatic
 
     def emotion_vector(self, nava):
+        """
+        creates emotion vector
+        :param nava:
+        :return:
+        """
         _t_pm = np.array([self.__pmi(nava, em) for em in Semantic.__emotions_concepts.keys()])
         return _t_pm
 
     def __pmi(self, nava, emotion):
+        """
+        pointwise mutual information
+        calculates emotion values
+        :param nava:
+        :param emotion:
+        :return:
+        """
         _pmi, _l = 1.0, len(Semantic.__emotions_concepts[emotion])
         if not nava.has_vector:
             return 0.00001

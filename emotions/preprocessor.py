@@ -6,6 +6,11 @@ class Preprocessor:
         self.__je = Context.nlp(u'{}'.format(journal_entry))
 
     def __getattr__(self, item):
+        """
+        Determines if word is verb, noun, adjective, or adverb
+        :param item:
+        :return:
+        """
         __avl_pos = {'verbs': 'VERB', 'nouns': 'NOUN', 'adjectives': 'ADJ', 'adverbs': 'ADV'}
 
         if item in __avl_pos:
