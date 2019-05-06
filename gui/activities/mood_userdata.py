@@ -1,11 +1,12 @@
-from datetime import datetime
-from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton
-from vaaya.gui.models import JrnEntry
+import json
+
+import numpy as np
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel
+
+from vaaya.emotions import Confidence
 from vaaya.utilities import screen_center
 from vaaya.contexts import Context
-from vaaya.emotions import Analyzer
-import json
 
 
 # Displays the analysis of the text with the confidence factor.
@@ -29,17 +30,35 @@ class MoodData(QWidget):
 
     # Fill the GUI
     def add_data(self):
+        __emts = ['happy', 'sad', 'angry', 'disgusted', 'fear', 'suprise']
         backbtn = QPushButton(text='Back', parent=self)
         backbtn.setObjectName('mood-btn-ok')
         backbtn.setProperty('class', 'mood-btn-clear')
         backbtn.clicked.connect(self.go_back)
-        self.grid.addWidget(backbtn, 0, 1)
+        self.grid.addWidget(backbtn, 0, 2)
 
-        #loc = Context.cvj
-        #data = JrnEntry.get(JrnEntry.log_time == loc)
+        data = Context.cvj
+        if not data: return
+        data_nlp = Context.nlp(data.journal)
+        ja = json.loads(data.analysis)
 
-        # loop. to make the columns skinnier use btn.setFixedWidth(size)
+        confidence = Confidence(data)
 
-    # Go to the previous screen
+        for i, s in enumerate(data_nlp.sents):
+            self.grid.addWidget(QLabel(str(s)), i + 1, 0)
+            self.grid.addWidget(QLabel(__emts[np.argmax(np.array(ja[i][0]))]), i + 1, 1)
+            self.grid.addWidget(QLabel(confidence.confidence_percentage(i)), i + 1, 2)
+
+    def update(self):
+        self.clear_grid()
+        self.add_data()
+        super().update()
+
+    def clear_grid(self):
+        while self.grid.count():
+            child = self.grid.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+
     def go_back(self):
         self.parent().parent().set_page(1)

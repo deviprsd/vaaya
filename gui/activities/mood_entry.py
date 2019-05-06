@@ -49,11 +49,11 @@ class MoodEntry(QWidget):
     @pyqtSlot()
     def save_data(self):
         user_entry = self.entry.toPlainText()
-        analysis = Analyzer(user_entry).analyze()
+        sents, docs = Analyzer(user_entry).analyze()
         jen = JrnEntry(**{
             "log_time": datetime.now(),
             "journal": user_entry,
-            "analysis": json.dumps(analysis, cls=NumpyEncoder)
+            "analysis": json.dumps(sents, cls=NumpyEncoder)
         })
         jen.save()
 

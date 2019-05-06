@@ -33,6 +33,7 @@ class MoodStackedActivity(QWidget):
         if not i < len(self.widgets): return
         self.win.setWindowTitle(self.widgets[i].windowTitle())
         self.stacker.setCurrentIndex(i)
+        self.widgets[i].update()
 
 
 class MoodMainActivity(QMainWindow):

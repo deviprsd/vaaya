@@ -69,7 +69,18 @@ class MoodAnalytics(QWidget):
     def delete_entry(self, date):
         data = JrnEntry.get(JrnEntry.log_time == date)
         data.delete_instance()
-        # ADD REFRESH HERE
+        self.update()
+
+    def update(self):
+        self.clear_grid()
+        self.add_entries()
+        super().update()
+
+    def clear_grid(self):
+        while self.grid.count():
+            child = self.grid.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
 
     def go_back(self):
         self.parent().parent().set_page(0)

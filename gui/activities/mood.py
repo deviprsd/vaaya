@@ -81,9 +81,10 @@ class MoodActivity(QWidget):
 
     @pyqtSlot()
     def save_mood_data(self, labels):
-        model_args, lbl = {"log_time": datetime.now()}, None
+        model_args, lbl, vec = {"log_time": datetime.now()}, None, []
         for lbl in labels:
+            vec.append(int(lbl.text().strip('%')))
             model_args[lbl.objectName().split('-')[2]] = int(lbl.text().strip('%'))
-
+        if max(vec) == 0: return
         dms = DMoods(**model_args)
         dms.save()
