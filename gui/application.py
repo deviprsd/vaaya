@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QSplashScreen, QMainWindow
 from PyQt5.QtCore import Qt
 
 
+# Generate the splash screen
 class SplashScreen:
     def __init__(self, parent, image=None, after=None):
         self.app = parent

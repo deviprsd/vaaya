@@ -19,6 +19,7 @@ class MoodEntry(QWidget):
         self.entry = QPlainTextEdit()
         self.draw()
 
+    # Build the entry gui.
     def draw(self):
         view_btn = QPushButton('View Entries')
         view_btn.setObjectName('mood-btn-ok')
@@ -42,10 +43,9 @@ class MoodEntry(QWidget):
 
     @pyqtSlot()
     def open_entries(self):
-        # Open the other gui for analytics (maybe just a list of previous entries?)
-        self.parent().parent().set_page(1) # after adding the new one to the list
-        # pass
+        self.parent().parent().set_page(1)
 
+    # Save the data to the data base
     @pyqtSlot()
     def save_data(self):
         user_entry = self.entry.toPlainText()
@@ -57,5 +57,6 @@ class MoodEntry(QWidget):
         })
         jen.save()
 
+    # Confirm saved
     def save_success(self):
         QMessageBox.about(self, ' ', "Saved Successfully!")

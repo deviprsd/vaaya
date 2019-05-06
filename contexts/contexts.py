@@ -4,6 +4,7 @@ class ContextWrapper(type):
     __app = None
     __csw = None
     __tsw = None
+    __cvj = None
 
     def __setattr__(self, key, value):
         if f'_ContextWrapper__{key}' in ContextWrapper.__dict__:

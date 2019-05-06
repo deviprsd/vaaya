@@ -40,7 +40,7 @@ class MoodMainActivity(QMainWindow):
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.stacker = QStackedWidget(self)
         self.stacker.setProperty('class', 'ctm-widget')
-        self.widgets = [MoodActivity(self), MoodStackedActivity(widgets, self), MoodActivity(self)]
+        self.widgets = [MoodActivity(self), MoodStackedActivity(widgets, self)]
 
         for w in self.widgets:
             self.stacker.addWidget(w)

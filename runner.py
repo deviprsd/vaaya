@@ -8,7 +8,7 @@ from vaaya.utilities import asset_path, get_icon
 from vaaya.contexts import Context
 from vaaya.gui.theme import Shraavani
 
-
+# Open the database, and setup the application
 def run():
     """
     Initialized the program, and it's dependencies, set Context variables required through out the program
@@ -50,8 +50,9 @@ def run():
             download('en_core_web_lg')
             Context.nlp = spacy.load('en_core_web_lg')
 
-        from vaaya.gui.activities import MoodMainActivity, MoodEntry, MoodAnalytics
-        sp.set_after(MoodMainActivity([MoodEntry(), MoodAnalytics()]))   # move me if needed
+        from vaaya.gui.activities import MoodMainActivity, MoodEntry, MoodAnalytics, MoodData
+        # Different GUI's for use
+        sp.set_after(MoodMainActivity([MoodEntry(), MoodAnalytics(), MoodData()]))   # move me if needed
 
     app.exec_()
 

@@ -1,7 +1,9 @@
 from datetime import datetime
 from functools import partial
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWidgets import QWidget, QGridLayout, QMessageBox, QPushButton
+from PyQt5.QtWidgets import QWidget, QGridLayout, QMessageBox, QPushButton, QScrollArea
+
+from vaaya.contexts import Context
 from vaaya.gui.models import JrnEntry
 from vaaya.utilities import screen_center, NumpyEncoder
 from vaaya.emotions import Analyzer
@@ -19,13 +21,13 @@ class MoodAnalytics(QWidget):
         super().__init__(None, Qt.MSWindowsFixedSizeDialogHint)
         self.setFocusPolicy(Qt.StrongFocus)
         self.setAttribute(Qt.WA_QuitOnClose, True)
-        self.grid = QGridLayout(self)
+        self.grid = QGridLayout(self) # self
         self.draw()
 
     def draw(self):
         self.add_entries()
         self.setWindowTitle('Click an Entry')
-        self.setLayout(self.grid)
+        self.setLayout(self.grid) # self.grid
         self.setGeometry(0, 0, 450, 200)
 
     def show(self):
@@ -59,7 +61,9 @@ class MoodAnalytics(QWidget):
 
     def show_entries(self, date):
         data = JrnEntry.get(JrnEntry.log_time == date)
-        QMessageBox.about(self, 'Journal Entry Data', data.journal)
+        Context.cvj = data
+        self.parent().parent().set_page(2)
+        # QMessageBox.about(self, 'Journal Entry Data', data.journal)
         # ADD ML DATA HERE
 
     def delete_entry(self, date):
