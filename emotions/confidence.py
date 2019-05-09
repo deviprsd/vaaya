@@ -12,7 +12,7 @@ class Confidence:
         ).order_by(DMoods.log_time.asc())
 
     def __get_dmoods(self):
-        return [np.array([d.smiley, d.sad, d.angry, d.disgusted, d.fear, d.surprised]) for d in list(self.__dm)]
+        return [np.array([d.smiley, d.sad, d.angry, d.fear, d.surprised, d.disgusted]) for d in list(self.__dm)]
 
     def __get_sent_em(self):
         return [np.array(ja[0]) for ja in json.loads(self.__je.analysis)]

@@ -1,13 +1,12 @@
-from datetime import datetime
 from functools import partial
-from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWidgets import QWidget, QGridLayout, QMessageBox, QPushButton, QScrollArea
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton
 
 from vaaya.contexts import Context
 from vaaya.gui.models import JrnEntry
-from vaaya.utilities import screen_center, NumpyEncoder
-from vaaya.emotions import Analyzer
-import json
+from vaaya.utilities import screen_center
+
 
 # UPDATE DEVI:
 # Get CSS on buttons (fix trim)
@@ -86,4 +85,7 @@ class MoodAnalytics(QWidget):
         self.parent().parent().set_page(0)
 
     def delete_all_entries(self):
-        pass
+        JrnEntry.delete().execute()
+        self.clear_grid()
+        self.add_entries()
+        super().update()

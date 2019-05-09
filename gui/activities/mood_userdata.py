@@ -30,7 +30,7 @@ class MoodData(QWidget):
 
     # Fill the GUI
     def add_data(self):
-        __emts = ['happy', 'sad', 'angry', 'disgusted', 'fear', 'suprise']
+        __emts = ['happy', 'sad', 'angry', 'fear', 'suprise', 'disgusted']
         backbtn = QPushButton(text='Back', parent=self)
         backbtn.setObjectName('mood-btn-ok')
         backbtn.setProperty('class', 'mood-btn-clear')

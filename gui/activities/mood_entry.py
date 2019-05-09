@@ -56,6 +56,7 @@ class MoodEntry(QWidget):
             "analysis": json.dumps(sents, cls=NumpyEncoder)
         })
         jen.save()
+        self.entry.setPlainText('')
 
     # Confirm saved
     def save_success(self):
