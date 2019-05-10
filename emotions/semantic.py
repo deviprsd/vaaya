@@ -40,7 +40,7 @@ class Semantic:
             # print(nava, e, nava.similarity(e))
             _pmi = _pmi * e.similarity(nava)
 
-        return (_pmi ** (1/_l+0j)).real * (0.78 if emotion == 'happiness' else 1.0)
+        return (_pmi ** (1/_l+0j)).real * (0.85 if emotion == 'happiness' else 1.0)
 
     def __getattr__(self, item):
         return getattr(self.__sync, item)

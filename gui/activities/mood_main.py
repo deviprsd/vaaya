@@ -1,7 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QStackedWidget, QHBoxLayout, QWidget, QVBoxLayout
+
 from utilities import screen_center
-from vaaya.gui.activities import MoodActivity, MoodAnalytics
+from vaaya.gui.activities import MoodActivity
 
 
 class MoodStackedActivity(QWidget):
