@@ -129,4 +129,5 @@ class MoodAnalytics(QWidget):
         delete all diary entries
         :return:
         """
-        pass
+        JrnEntry.delete().execute()
+        self.update()
